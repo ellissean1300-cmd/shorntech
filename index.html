@@ -29,7 +29,8 @@
     <p>Building technology solutions.</p>
 </body>
 <script>
-fetch("https://shorntech.vercel.app/api/visit", {
+// Using a relative path makes this work on any domain you point to Vercel
+fetch("/api/visit", {
   method: "POST"
 }).catch(() => {});
 </script>

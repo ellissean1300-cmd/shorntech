@@ -1,37 +1,100 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-T639EV4L6V"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-T639EV4L6V');
-
-</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T639EV4L6V"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-T639EV4L6V');
+    </script>
     <title>ShornTech</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 50px auto;
-            text-align: center;
+        :root {
+            --brand: #67276e;
+            --brand-light: #8a3f93;
+            --bg: #faf8fb;
+            --text: #2b1f2e;
+            --muted: #6b5e6e;
         }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(160deg, var(--bg) 0%, #ffffff 60%);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .card {
+            max-width: 640px;
+            width: 100%;
+            text-align: center;
+            padding: 64px 40px;
+        }
+
+        .logo {
+            width: 88px;
+            height: 88px;
+            margin: 0 auto 28px;
+            border-radius: 20px;
+            object-fit: cover;
+            box-shadow: 0 8px 24px rgba(103, 39, 110, 0.18);
+        }
+
         h1 {
-            color: #67276e;
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, var(--brand), var(--brand-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 12px;
+        }
+
+        p.tagline {
+            font-size: 1.15rem;
+            color: var(--muted);
+            font-weight: 400;
+        }
+
+        .accent-line {
+            width: 56px;
+            height: 4px;
+            background: linear-gradient(135deg, var(--brand), var(--brand-light));
+            border-radius: 2px;
+            margin: 24px auto;
         }
     </style>
 </head>
 <body>
-    <h1>ShornTech</h1>
-    <p>yoyoyoyoyo.</p>
-</body>
+    <div class="card">
+        <!-- Replace src below with your image path/URL once you add one -->
+        <!-- <img class="logo" src="logo.png" alt="ShornTech logo"> -->
+
+        <h1>ShornTech</h1>
+        <div class="accent-line"></div>
+        <p class="tagline">Building technology solutions.</p>
+    </div>
+
 <script>
 // Using a relative path makes this work on any domain you point to Vercel
 fetch("/api/visit", {
   method: "POST"
 }).catch(() => {});
 </script>
+</body>
 </html>

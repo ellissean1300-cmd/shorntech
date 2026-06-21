@@ -1,99 +1,655 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T639EV4L6V"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-T639EV4L6V');
-    </script>
-    <title>ShornTech</title>
-    <style>
-        :root {
-            --brand: #67276e;
-            --brand-light: #8a3f93;
-            --bg: #faf8fb;
-            --text: #2b1f2e;
-            --muted: #6b5e6e;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T639EV4L6V"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-T639EV4L6V');
+</script>
+<title>ShornTech — Initiative Ledger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Crimson+Pro:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#251a27;
+    --ink-soft:#564459;
+    --parchment:#f6efe1;
+    --parchment-deep:#ead9bb;
+    --parchment-line: rgba(37,26,39,0.14);
+    --brand:#67276e;
+    --brand-light:#9c4aa6;
+    --gold:#a8782f;
+    --gold-soft:#c79a4f;
+    --blood:#8c2f3f;
+    --blood-soft:#b3505f;
+    --ok:#4c7a52;
+    --ok-soft:#6e9b73;
+    --shadow: 0 10px 30px rgba(37,26,39,0.12);
+    --radius: 10px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    font-family:'Crimson Pro', Georgia, serif;
+    background:
+      radial-gradient(circle at 12% 8%, rgba(103,39,110,0.07), transparent 40%),
+      radial-gradient(circle at 88% 92%, rgba(168,120,47,0.08), transparent 45%),
+      var(--parchment);
+    color:var(--ink);
+    min-height:100vh;
+    line-height:1.5;
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:36px 20px 80px;}
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  /* ---------- Header ---------- */
+  header.site{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:28px;flex-wrap:wrap;}
+  .brandmark{display:flex;align-items:center;gap:10px;}
+  .brandmark .mark{
+    width:30px;height:30px;border-radius:7px;
+    background:linear-gradient(150deg,var(--brand),var(--brand-light));
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Cinzel',serif;color:#fbf3ff;font-weight:700;font-size:0.95rem;
+  }
+  .brandmark .name{font-family:'Cinzel',serif;font-weight:600;font-size:0.92rem;letter-spacing:0.04em;color:var(--ink-soft);text-transform:uppercase;}
+  h1.page-title{
+    font-family:'Cinzel',serif;font-weight:700;font-size:1.9rem;letter-spacing:0.01em;
+    color:var(--ink);
+  }
+  p.subtitle{color:var(--ink-soft);font-size:0.98rem;font-style:italic;margin-top:4px;}
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-            background: linear-gradient(160deg, var(--bg) 0%, #ffffff 60%);
-            color: var(--text);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 24px;
-        }
+  /* ---------- Controls row ---------- */
+  .controls{
+    display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+    padding:18px 20px;margin-bottom:26px;
+    background:rgba(255,255,255,0.5);
+    border:1px solid var(--parchment-line);
+    border-radius:var(--radius);
+  }
+  .seal{
+    width:62px;height:62px;border-radius:50%;flex-shrink:0;
+    background:var(--parchment-deep);
+    border:2px solid var(--gold-soft);
+    box-shadow: inset 0 0 0 3px var(--parchment), 0 2px 6px rgba(37,26,39,0.18);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+  }
+  .seal .num{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.25rem;color:var(--brand);line-height:1;}
+  .seal .lbl{font-family:'Cinzel',serif;font-size:0.52rem;letter-spacing:0.08em;color:var(--ink-soft);text-transform:uppercase;margin-top:1px;}
 
-        .card {
-            max-width: 640px;
-            width: 100%;
-            text-align: center;
-            padding: 64px 40px;
-        }
+  .turn-buttons{display:flex;align-items:center;gap:8px;}
+  button{font-family:inherit;cursor:pointer;border:none;border-radius:7px;}
+  button:disabled{opacity:0.45;cursor:not-allowed;}
+  .btn-primary{
+    background:linear-gradient(150deg,var(--brand),var(--brand-light));
+    color:#fbf3ff;font-weight:600;font-size:0.95rem;padding:11px 20px;
+    box-shadow:0 4px 12px rgba(103,39,110,0.28);
+  }
+  .btn-primary:hover:not(:disabled){filter:brightness(1.06);}
+  .btn-ghost{
+    background:transparent;border:1px solid var(--parchment-line);
+    color:var(--ink-soft);font-size:0.95rem;padding:10px 14px;
+  }
+  .btn-ghost:hover:not(:disabled){border-color:var(--brand-light);color:var(--brand);}
+  .controls .spacer{flex:1;}
+  .link-danger{
+    background:none;border:none;color:var(--ink-soft);font-size:0.85rem;text-decoration:underline;
+    text-decoration-color:var(--parchment-line);
+  }
+  .link-danger:hover{color:var(--blood);text-decoration-color:var(--blood-soft);}
 
-        .logo {
-            width: 88px;
-            height: 88px;
-            margin: 0 auto 28px;
-            border-radius: 20px;
-            object-fit: cover;
-            box-shadow: 0 8px 24px rgba(103, 39, 110, 0.18);
-        }
+  /* ---------- Add combatant form ---------- */
+  form#add-form{
+    display:grid;
+    grid-template-columns: 2fr 1fr 1fr 0.9fr 0.9fr 0.9fr auto;
+    gap:10px;align-items:end;
+    padding:18px 20px;margin-bottom:30px;
+    background:rgba(255,255,255,0.5);
+    border:1px solid var(--parchment-line);
+    border-radius:var(--radius);
+  }
+  .field{display:flex;flex-direction:column;gap:4px;min-width:0;}
+  .field label{font-size:0.72rem;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink-soft);}
+  .field input, .field select{
+    font-family:'JetBrains Mono',monospace;font-size:0.92rem;
+    padding:8px 9px;border:1px solid var(--parchment-line);border-radius:6px;
+    background:#fffdf8;color:var(--ink);width:100%;
+  }
+  .field input[type="text"]{font-family:'Crimson Pro',serif;font-size:0.98rem;}
+  .field input:focus-visible, .field select:focus-visible{outline:2px solid var(--brand-light);outline-offset:1px;}
+  .init-roll{display:flex;gap:5px;}
+  .init-roll input{width:100%;}
+  .roll-btn{
+    background:var(--parchment-deep);color:var(--brand);font-size:0.78rem;font-weight:600;
+    padding:0 9px;border:1px solid var(--gold-soft);white-space:nowrap;border-radius:6px;
+  }
+  .roll-btn:hover{background:var(--gold-soft);color:#fff;}
+  #add-form .submit-cell{display:flex;}
+  .btn-add{
+    background:var(--ink);color:#fdf6ea;font-weight:600;font-size:0.9rem;
+    padding:9px 16px;white-space:nowrap;
+  }
+  .btn-add:hover{background:var(--brand);}
 
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            background: linear-gradient(135deg, var(--brand), var(--brand-light));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: 12px;
-        }
+  /* ---------- Ledger / list ---------- */
+  .ledger-heading{
+    display:flex;align-items:center;gap:10px;margin-bottom:12px;
+  }
+  .ledger-heading span{font-family:'Cinzel',serif;font-size:0.85rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-soft);}
+  .ledger-heading .rule{flex:1;height:1px;background:var(--parchment-line);}
 
-        p.tagline {
-            font-size: 1.15rem;
-            color: var(--muted);
-            font-weight: 400;
-        }
+  .empty-state{
+    text-align:center;padding:48px 20px;color:var(--ink-soft);font-style:italic;
+    border:1px dashed var(--parchment-line);border-radius:var(--radius);
+  }
 
-        .accent-line {
-            width: 56px;
-            height: 4px;
-            background: linear-gradient(135deg, var(--brand), var(--brand-light));
-            border-radius: 2px;
-            margin: 24px auto;
-        }
-    </style>
+  .combatant-list{list-style:none;display:flex;flex-direction:column;gap:10px;}
+  .combatant{
+    position:relative;
+    display:grid;
+    grid-template-columns: 54px 1.6fr 1.3fr;
+    gap:14px;align-items:center;
+    padding:14px 44px 14px 16px;
+    background:#fffdf8;
+    border:1px solid var(--parchment-line);
+    border-left:4px solid var(--parchment-line);
+    border-radius:8px;
+    transition:transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .combatant.is-active{
+    border-left-color:var(--gold);
+    box-shadow:0 6px 18px rgba(168,120,47,0.22);
+    transform:translateX(2px);
+  }
+  .init-badge{
+    width:44px;height:44px;border-radius:50%;
+    background:var(--parchment-deep);border:1.5px solid var(--gold-soft);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--brand);font-size:1.02rem;
+    padding:0;text-align:center;-moz-appearance:textfield;
+  }
+  .init-badge::-webkit-outer-spin-button,.init-badge::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
+  .init-badge:focus-visible{outline:2px solid var(--brand-light);outline-offset:2px;}
+  .combatant.is-active .init-badge{background:var(--gold-soft);color:#fff;border-color:var(--gold);}
+
+  .name-col input.name-input{
+    font-family:'Crimson Pro',serif;font-weight:600;font-size:1.05rem;color:var(--ink);
+    background:transparent;border:none;border-bottom:1px solid transparent;width:100%;padding:1px 0;
+  }
+  .name-col input.name-input:focus-visible{outline:none;border-bottom-color:var(--brand-light);}
+  .meta-row{display:flex;align-items:center;gap:8px;margin-top:4px;flex-wrap:wrap;}
+  .type-badge{
+    font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.06em;text-transform:uppercase;
+    padding:2px 8px;border-radius:20px;font-weight:600;
+  }
+  .type-PC{background:rgba(103,39,110,0.13);color:var(--brand);}
+  .type-NPC{background:rgba(168,120,47,0.16);color:var(--gold);}
+  .type-Enemy{background:rgba(140,47,63,0.13);color:var(--blood);}
+  select.type-select{
+    font-family:'Cinzel',serif;font-size:0.62rem;text-transform:uppercase;letter-spacing:0.06em;
+    border:none;background:transparent;color:var(--ink-soft);padding:0;
+  }
+  .ac-chip{font-family:'JetBrains Mono',monospace;font-size:0.78rem;color:var(--ink-soft);}
+  .ac-chip input{
+    width:32px;border:none;background:transparent;font-family:'JetBrains Mono',monospace;color:var(--ink-soft);
+    border-bottom:1px dotted var(--parchment-line);text-align:center;
+  }
+
+  .conditions{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;}
+  .chip{
+    display:inline-flex;align-items:center;gap:5px;
+    background:var(--parchment-deep);color:var(--ink-soft);
+    font-size:0.74rem;padding:2px 4px 2px 9px;border-radius:14px;
+  }
+  .chip button{background:none;color:var(--ink-soft);font-size:0.8rem;line-height:1;padding:3px 6px;border-radius:50%;}
+  .chip button:hover{background:var(--blood-soft);color:#fff;}
+  .add-condition{display:flex;gap:5px;margin-top:6px;align-items:center;}
+  .add-condition input{
+    font-size:0.74rem;padding:3px 7px;border:1px solid var(--parchment-line);border-radius:12px;
+    width:120px;background:#fffdf8;
+  }
+  .add-condition button{
+    font-size:0.7rem;color:var(--brand);background:none;text-decoration:underline;padding:2px;
+  }
+
+  .hp-col{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:6px;min-width:150px;}
+  .hp-numbers{display:flex;align-items:baseline;gap:4px;font-family:'JetBrains Mono',monospace;}
+  .hp-numbers input{
+    width:42px;text-align:right;border:none;background:transparent;font-family:'JetBrains Mono',monospace;
+    font-weight:700;font-size:1.05rem;color:var(--ink);border-bottom:1px dotted var(--parchment-line);
+  }
+  .hp-numbers .slash{color:var(--ink-soft);}
+  .hp-numbers input.max-input{font-weight:500;font-size:0.92rem;color:var(--ink-soft);width:38px;}
+  .hp-bar{width:140px;height:6px;border-radius:4px;background:var(--parchment-deep);overflow:hidden;}
+  .hp-bar .fill{height:100%;border-radius:4px;transition:width 0.2s ease, background 0.2s ease;}
+  .hp-actions{display:flex;gap:4px;align-items:center;}
+  .hp-actions button{
+    font-family:'JetBrains Mono',monospace;font-size:0.74rem;padding:3px 7px;
+    background:var(--parchment-deep);color:var(--ink-soft);border-radius:5px;
+  }
+  .hp-actions button:hover{background:var(--ink-soft);color:#fff;}
+  .hp-actions .amt{width:38px;text-align:center;font-size:0.74rem;padding:3px 2px;border:1px solid var(--parchment-line);border-radius:5px;background:#fffdf8;}
+  .hp-actions .dmg{color:var(--blood);}
+  .hp-actions .heal{color:var(--ok);}
+
+  .remove-col{position:absolute;top:8px;right:8px;}
+  .remove-btn{
+    background:none;color:var(--ink-soft);font-size:0.95rem;padding:4px 7px;border-radius:5px;
+  }
+  .remove-btn:hover{background:rgba(140,47,63,0.12);color:var(--blood);}
+
+  .flame{display:inline-block;margin-left:6px;}
+  @media (prefers-reduced-motion: no-preference){
+    .is-active .flame{animation:flicker 1.6s infinite ease-in-out;}
+  }
+  @keyframes flicker{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.6;transform:scale(0.92);}}
+
+  footer.site{margin-top:48px;text-align:center;color:var(--ink-soft);font-size:0.82rem;font-style:italic;}
+
+  @media (max-width:760px){
+    form#add-form{grid-template-columns:1fr 1fr;}
+    form#add-form .submit-cell{grid-column:1 / -1;justify-content:stretch;}
+    .btn-add{width:100%;}
+    .combatant{grid-template-columns:44px 1fr;grid-template-rows:auto auto;}
+    .hp-col{grid-column:1 / -1;align-items:flex-start;text-align:left;margin-top:6px;}
+    .hp-bar{width:100%;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important;transition:none !important;}
+  }
+</style>
 </head>
 <body>
-    <div class="card">
-        <img class="logo" src="cat.png" alt="ShornTech logo">
+<div class="wrap">
 
-        <h1>ShornTech</h1>
-        <div class="accent-line"></div>
-        <p class="tagline">Building technology solutions.</p>
+  <header class="site">
+    <div class="brandmark">
+      <div class="mark">S</div>
+      <span class="name">ShornTech</span>
     </div>
+  </header>
+
+  <h1 class="page-title">Initiative Ledger</h1>
+  <p class="subtitle">Track turns, hit points, and conditions without losing your place at the table.</p>
+
+  <section class="controls" aria-label="Encounter controls">
+    <div class="seal">
+      <span class="num" id="round-num">1</span>
+      <span class="lbl">Round</span>
+    </div>
+    <div class="turn-buttons">
+      <button type="button" class="btn-ghost" id="prev-turn">&larr; Previous</button>
+      <button type="button" class="btn-primary" id="next-turn">Next turn &rarr;</button>
+    </div>
+    <div class="spacer"></div>
+    <button type="button" class="link-danger" id="new-encounter">New encounter</button>
+  </section>
+
+  <form id="add-form" aria-label="Add a combatant">
+    <div class="field" style="grid-column:1;">
+      <label for="f-name">Name</label>
+      <input type="text" id="f-name" placeholder="Goblin scout" required>
+    </div>
+    <div class="field">
+      <label for="f-type">Type</label>
+      <select id="f-type">
+        <option value="PC">PC</option>
+        <option value="NPC">NPC</option>
+        <option value="Enemy" selected>Enemy</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="f-init">Initiative</label>
+      <div class="init-roll">
+        <input type="number" id="f-init" placeholder="0">
+        <button type="button" class="roll-btn" id="f-roll" title="Roll 1d20 + modifier into Initiative">d20</button>
+      </div>
+    </div>
+    <div class="field">
+      <label for="f-hp">HP</label>
+      <input type="number" id="f-hp" placeholder="10">
+    </div>
+    <div class="field">
+      <label for="f-ac">AC</label>
+      <input type="number" id="f-ac" placeholder="10">
+    </div>
+    <div class="field">
+      <label for="f-mod">d20 mod</label>
+      <input type="number" id="f-mod" placeholder="0" value="0">
+    </div>
+    <div class="field submit-cell">
+      <label>&nbsp;</label>
+      <button type="submit" class="btn-add">Add to ledger</button>
+    </div>
+  </form>
+
+  <div class="ledger-heading">
+    <span>Turn order</span>
+    <div class="rule"></div>
+  </div>
+
+  <ul class="combatant-list" id="combatant-list"></ul>
+  <div class="empty-state" id="empty-state" hidden>The ledger is empty. Add a combatant above to start the fight.</div>
+
+  <datalist id="condition-list">
+    <option value="Blinded"><option value="Charmed"><option value="Deafened">
+    <option value="Frightened"><option value="Grappled"><option value="Incapacitated">
+    <option value="Invisible"><option value="Paralyzed"><option value="Petrified">
+    <option value="Poisoned"><option value="Prone"><option value="Restrained">
+    <option value="Stunned"><option value="Unconscious"><option value="Exhaustion">
+    <option value="Concentrating">
+  </datalist>
+
+  <footer class="site">Built for the table.</footer>
+</div>
 
 <script>
 // Using a relative path makes this work on any domain you point to Vercel
-fetch("/api/visit", {
-  method: "POST"
-}).catch(() => {});
+fetch("/api/visit", { method: "POST" }).catch(() => {});
+</script>
+
+<script>
+(function(){
+  "use strict";
+  var STORAGE_KEY = "shorntech-initiative-ledger-v1";
+
+  var state = {
+    round: 1,
+    activeId: null,
+    combatants: [] // {id, name, type, init, hp, maxHp, ac, conditions: []}
+  };
+
+  function load(){
+    try{
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if(raw){
+        var parsed = JSON.parse(raw);
+        if(parsed && Array.isArray(parsed.combatants)){
+          state = parsed;
+        }
+      }
+    }catch(e){ /* ignore corrupt storage */ }
+  }
+  function save(){
+    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }catch(e){ /* storage unavailable */ }
+  }
+
+  function uid(){ return 'c' + Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
+
+  function sortedList(){
+    return state.combatants
+      .map(function(c, i){ return {c:c, i:i}; })
+      .sort(function(a,b){ return (b.c.init - a.c.init) || (a.i - b.i); })
+      .map(function(x){ return x.c; });
+  }
+
+  function clamp(n, lo, hi){ return Math.max(lo, Math.min(hi, n)); }
+
+  function ensureActive(){
+    var list = sortedList();
+    if(list.length === 0){ state.activeId = null; return; }
+    if(!list.some(function(c){ return c.id === state.activeId; })){
+      state.activeId = list[0].id;
+    }
+  }
+
+  function nextTurn(){
+    var list = sortedList();
+    if(list.length === 0) return;
+    var idx = list.findIndex(function(c){ return c.id === state.activeId; });
+    if(idx === -1){ state.activeId = list[0].id; }
+    else{
+      idx = (idx + 1) % list.length;
+      if(idx === 0) state.round += 1;
+      state.activeId = list[idx].id;
+    }
+    save(); render();
+  }
+
+  function prevTurn(){
+    var list = sortedList();
+    if(list.length === 0) return;
+    var idx = list.findIndex(function(c){ return c.id === state.activeId; });
+    if(idx === -1){ state.activeId = list[0].id; }
+    else{
+      idx = idx - 1;
+      if(idx < 0){ idx = list.length - 1; if(state.round > 1) state.round -= 1; }
+      state.activeId = list[idx].id;
+    }
+    save(); render();
+  }
+
+  function addCombatant(data){
+    state.combatants.push({
+      id: uid(),
+      name: data.name,
+      type: data.type,
+      init: data.init,
+      hp: data.hp,
+      maxHp: data.hp,
+      ac: data.ac,
+      conditions: []
+    });
+    ensureActive();
+    save(); render();
+  }
+
+  function removeCombatant(id){
+    var list = sortedList();
+    var idx = list.findIndex(function(c){ return c.id === id; });
+    state.combatants = state.combatants.filter(function(c){ return c.id !== id; });
+    if(state.activeId === id){
+      var newList = sortedList();
+      if(newList.length === 0){ state.activeId = null; }
+      else{
+        var pick = idx < newList.length ? idx : 0;
+        state.activeId = newList[pick].id;
+      }
+    }
+    save(); render();
+  }
+
+  function findC(id){ return state.combatants.find(function(c){ return c.id === id; }); }
+
+  function adjustHp(id, delta){
+    var c = findC(id); if(!c) return;
+    c.hp = clamp(c.hp + delta, 0, c.maxHp);
+    save(); render();
+  }
+
+  function setField(id, field, value){
+    var c = findC(id); if(!c) return;
+    c[field] = value;
+    if(field === 'maxHp' && c.maxHp < 1) c.maxHp = 1;
+    c.hp = clamp(c.hp, 0, c.maxHp);
+    save(); render();
+  }
+
+  function addCondition(id, text){
+    var c = findC(id); if(!c || !text) return;
+    text = text.trim();
+    if(!text) return;
+    if(c.conditions.indexOf(text) === -1) c.conditions.push(text);
+    save(); render();
+  }
+
+  function removeCondition(id, text){
+    var c = findC(id); if(!c) return;
+    c.conditions = c.conditions.filter(function(t){ return t !== text; });
+    save(); render();
+  }
+
+  function hpColor(ratio){
+    if(ratio > 0.5) return getCss('--ok');
+    if(ratio > 0.25) return getCss('--gold-soft');
+    return getCss('--blood');
+  }
+  function getCss(name){
+    return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  }
+
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, function(ch){
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[ch];
+    });
+  }
+
+  function render(){
+    ensureActive();
+    document.getElementById('round-num').textContent = state.round;
+
+    var list = sortedList();
+    var listEl = document.getElementById('combatant-list');
+    var emptyEl = document.getElementById('empty-state');
+
+    document.getElementById('next-turn').disabled = list.length === 0;
+    document.getElementById('prev-turn').disabled = list.length === 0;
+
+    if(list.length === 0){
+      listEl.innerHTML = '';
+      emptyEl.hidden = false;
+      return;
+    }
+    emptyEl.hidden = true;
+
+    listEl.innerHTML = list.map(function(c){
+      var isActive = c.id === state.activeId;
+      var ratio = c.maxHp > 0 ? clamp(c.hp / c.maxHp, 0, 1) : 0;
+      var barColor = hpColor(ratio);
+      var conditionsHtml = c.conditions.map(function(t){
+        return '<span class="chip">' + escapeHtml(t) +
+          '<button type="button" data-action="remove-condition" data-id="' + c.id + '" data-text="' + escapeHtml(t) + '" aria-label="Remove condition: ' + escapeHtml(t) + '">&times;</button></span>';
+      }).join('');
+
+      return (
+        '<li class="combatant' + (isActive ? ' is-active' : '') + '" data-id="' + c.id + '">' +
+          '<input type="number" class="init-badge" value="' + c.init + '" data-action="set-field" data-id="' + c.id + '" data-field="init" aria-label="Initiative for ' + escapeHtml(c.name) + '">' +
+          '<div class="name-col">' +
+            '<input type="text" class="name-input" value="' + escapeHtml(c.name) + '" data-action="set-field" data-id="' + c.id + '" data-field="name" aria-label="Name">' +
+            (isActive ? '<span class="flame" aria-hidden="true">\uD83D\uDD25</span>' : '') +
+            '<div class="meta-row">' +
+              '<select class="type-select" data-action="set-field" data-id="' + c.id + '" data-field="type" aria-label="Type">' +
+                ['PC','NPC','Enemy'].map(function(t){ return '<option value="' + t + '"' + (t===c.type?' selected':'') + '>' + t + '</option>'; }).join('') +
+              '</select>' +
+              '<span class="type-badge type-' + c.type + '">' + c.type + '</span>' +
+              '<span class="ac-chip">AC <input type="number" value="' + c.ac + '" data-action="set-field" data-id="' + c.id + '" data-field="ac" aria-label="Armor class"></span>' +
+            '</div>' +
+            '<div class="conditions">' + conditionsHtml + '</div>' +
+            '<div class="add-condition">' +
+              '<input type="text" list="condition-list" placeholder="Add condition" data-role="condition-input" aria-label="Add a condition for ' + escapeHtml(c.name) + '">' +
+              '<button type="button" data-action="add-condition" data-id="' + c.id + '">Add</button>' +
+            '</div>' +
+          '</div>' +
+          '<div class="hp-col">' +
+            '<div class="hp-numbers">' +
+              '<input type="number" value="' + c.hp + '" min="0" data-action="set-field" data-id="' + c.id + '" data-field="hp" aria-label="Current hit points">' +
+              '<span class="slash">/</span>' +
+              '<input type="number" class="max-input" value="' + c.maxHp + '" min="1" data-action="set-field" data-id="' + c.id + '" data-field="maxHp" aria-label="Max hit points">' +
+            '</div>' +
+            '<div class="hp-bar"><div class="fill" style="width:' + (ratio*100) + '%;background:' + barColor + ';"></div></div>' +
+            '<div class="hp-actions">' +
+              '<input type="number" class="amt" value="5" data-role="hp-amount" aria-label="Amount">' +
+              '<button type="button" class="dmg" data-action="dmg" data-id="' + c.id + '">&minus; Dmg</button>' +
+              '<button type="button" class="heal" data-action="heal" data-id="' + c.id + '">+ Heal</button>' +
+            '</div>' +
+          '</div>' +
+          '<div class="remove-col"><button type="button" class="remove-btn" data-action="remove" data-id="' + c.id + '" aria-label="Remove ' + escapeHtml(c.name) + ' from the ledger">&times;</button></div>' +
+        '</li>'
+      );
+    }).join('');
+  }
+
+  // ---- Event wiring ----
+  document.getElementById('next-turn').addEventListener('click', nextTurn);
+  document.getElementById('prev-turn').addEventListener('click', prevTurn);
+  document.getElementById('new-encounter').addEventListener('click', function(){
+    if(state.combatants.length === 0){
+      state.round = 1; state.activeId = null; save(); render(); return;
+    }
+    if(confirm('Clear the ledger and start a new encounter? This removes every combatant.')){
+      state = { round: 1, activeId: null, combatants: [] };
+      save(); render();
+    }
+  });
+
+  document.getElementById('f-roll').addEventListener('click', function(){
+    var mod = parseInt(document.getElementById('f-mod').value, 10) || 0;
+    var roll = Math.floor(Math.random()*20) + 1 + mod;
+    document.getElementById('f-init').value = roll;
+  });
+
+  document.getElementById('add-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = document.getElementById('f-name').value.trim();
+    if(!name) return;
+    var type = document.getElementById('f-type').value;
+    var init = parseInt(document.getElementById('f-init').value, 10);
+    var hp = parseInt(document.getElementById('f-hp').value, 10);
+    var ac = parseInt(document.getElementById('f-ac').value, 10);
+    addCombatant({
+      name: name,
+      type: type,
+      init: isNaN(init) ? 0 : init,
+      hp: isNaN(hp) || hp <= 0 ? 10 : hp,
+      ac: isNaN(ac) ? 10 : ac
+    });
+    this.reset();
+    document.getElementById('f-type').value = type; // keep last type choice
+    document.getElementById('f-mod').value = 0;
+    document.getElementById('f-name').focus();
+  });
+
+  document.getElementById('combatant-list').addEventListener('click', function(e){
+    var btn = e.target.closest('button[data-action]');
+    if(!btn) return;
+    var action = btn.dataset.action;
+    var id = btn.dataset.id;
+
+    if(action === 'remove'){
+      if(confirm('Remove this combatant from the ledger?')) removeCombatant(id);
+    } else if(action === 'dmg' || action === 'heal'){
+      var card = btn.closest('.combatant');
+      var amtInput = card.querySelector('[data-role="hp-amount"]');
+      var amt = parseInt(amtInput.value, 10) || 0;
+      adjustHp(id, action === 'dmg' ? -amt : amt);
+    } else if(action === 'add-condition'){
+      var card2 = btn.closest('.combatant');
+      var input = card2.querySelector('[data-role="condition-input"]');
+      addCondition(id, input.value);
+    } else if(action === 'remove-condition'){
+      removeCondition(id, btn.dataset.text);
+    }
+  });
+
+  document.getElementById('combatant-list').addEventListener('keydown', function(e){
+    if(e.key === 'Enter' && e.target.dataset.role === 'condition-input'){
+      e.preventDefault();
+      var card = e.target.closest('.combatant');
+      addCondition(card.dataset.id, e.target.value);
+    }
+  });
+
+  document.getElementById('combatant-list').addEventListener('change', function(e){
+    var el = e.target;
+    if(el.dataset.action === 'set-field'){
+      var field = el.dataset.field;
+      var id = el.dataset.id;
+      var value = el.value;
+      if(field === 'init' || field === 'ac' || field === 'hp' || field === 'maxHp'){
+        value = parseInt(value, 10);
+        if(isNaN(value)) value = 0;
+      }
+      setField(id, field, value);
+    }
+  });
+
+  load();
+  ensureActive();
+  render();
+})();
 </script>
 </body>
 </html>

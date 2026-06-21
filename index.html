@@ -260,6 +260,99 @@
   @media (prefers-reduced-motion: reduce){
     *{animation:none !important;transition:none !important;}
   }
+
+  /* ---------- Tabs ---------- */
+  .tabs{display:flex;gap:6px;margin-bottom:28px;border-bottom:1px solid var(--parchment-line);}
+  .tab-btn{
+    background:none;border:none;padding:10px 4px;margin-right:18px;
+    font-family:'Cinzel',serif;font-size:0.85rem;letter-spacing:0.04em;text-transform:uppercase;
+    color:var(--ink-soft);border-bottom:2px solid transparent;border-radius:0;
+  }
+  .tab-btn:hover{color:var(--brand);}
+  .tab-btn.is-active{color:var(--brand);border-bottom-color:var(--gold);}
+
+  /* ---------- Map bar / chips ---------- */
+  .map-bar{display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap;}
+  .map-chips{display:flex;gap:8px;flex-wrap:wrap;flex:1;}
+  .map-chip{
+    display:inline-flex;align-items:center;gap:6px;
+    background:rgba(255,255,255,0.6);border:1px solid var(--parchment-line);
+    border-radius:20px;padding:6px 6px 6px 14px;font-size:0.85rem;color:var(--ink-soft);
+  }
+  .map-chip.is-active{border-color:var(--gold);color:var(--brand);background:rgba(168,120,47,0.1);}
+  .map-chip button.open{background:none;color:inherit;font-family:'Crimson Pro',serif;}
+  .map-chip button.close-chip{background:none;color:var(--ink-soft);padding:3px 7px;border-radius:50%;}
+  .map-chip button.close-chip:hover{background:var(--blood-soft);color:#fff;}
+
+  .map-new-form{
+    display:grid;grid-template-columns:2fr 1.2fr 1fr 1fr auto auto;gap:10px;align-items:end;
+    padding:16px 20px;margin-bottom:22px;background:rgba(255,255,255,0.5);
+    border:1px solid var(--parchment-line);border-radius:var(--radius);
+  }
+
+  /* ---------- Map editor ---------- */
+  .map-meta{display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap;}
+  .map-name-input{
+    font-family:'Cinzel',serif;font-weight:600;font-size:1.1rem;color:var(--ink);
+    background:transparent;border:none;border-bottom:1px solid transparent;padding:2px 0;min-width:140px;
+  }
+  .map-name-input:focus-visible{outline:none;border-bottom-color:var(--brand-light);}
+  .kind-Battle{background:rgba(140,47,63,0.13);color:var(--blood);}
+  .kind-Dungeon{background:rgba(86,68,89,0.15);color:var(--ink-soft);}
+  .kind-World{background:rgba(76,122,82,0.15);color:var(--ok);}
+
+  .toolbar{
+    display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+    padding:12px 16px;margin-bottom:12px;background:rgba(255,255,255,0.5);
+    border:1px solid var(--parchment-line);border-radius:var(--radius);
+  }
+  .tool-group{display:flex;gap:4px;}
+  .tool-btn{
+    background:transparent;border:1px solid var(--parchment-line);color:var(--ink-soft);
+    font-size:0.85rem;padding:7px 12px;
+  }
+  .tool-btn.is-active{background:var(--brand);color:#fbf3ff;border-color:var(--brand);}
+  .tool-btn:hover:not(.is-active){border-color:var(--brand-light);color:var(--brand);}
+  .palette{display:flex;gap:6px;flex-wrap:wrap;}
+  .swatch{
+    width:30px;height:30px;border-radius:6px;border:2px solid transparent;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;font-size:0.95rem;
+  }
+  .swatch.is-active{border-color:var(--ink);}
+  .grid-toggle{display:flex;align-items:center;gap:6px;font-size:0.85rem;color:var(--ink-soft);}
+
+  .map-resize{display:flex;align-items:end;gap:14px;flex-wrap:wrap;margin-bottom:16px;}
+  .map-resize input[type="number"]{width:64px;}
+  .map-resize input[type="range"]{width:120px;}
+
+  .map-stage{display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap;}
+  .canvas-wrap{
+    overflow:auto;max-width:100%;border:1px solid var(--parchment-line);border-radius:8px;
+    background:#fffdf8;flex:1;min-width:280px;max-height:560px;
+  }
+  #map-canvas{display:block;cursor:crosshair;touch-action:none;}
+
+  .inspector{
+    width:240px;flex-shrink:0;padding:16px;background:rgba(255,255,255,0.6);
+    border:1px solid var(--parchment-line);border-radius:var(--radius);
+    font-size:0.88rem;color:var(--ink-soft);
+  }
+  .inspector-hint{font-style:italic;}
+  .inspector h3{font-family:'Cinzel',serif;font-size:0.85rem;color:var(--ink);margin-bottom:10px;letter-spacing:0.02em;}
+  .inspector .field{margin-bottom:10px;}
+  .inspector .field label{font-size:0.68rem;}
+  .inspector .field input, .inspector .field select{
+    font-family:'Crimson Pro',serif;font-size:0.92rem;padding:6px 8px;border:1px solid var(--parchment-line);
+    border-radius:6px;background:#fffdf8;width:100%;
+  }
+  .inspector .hp-readout{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--ink);margin-bottom:10px;}
+  .inspector .btn-ghost, .inspector .link-danger{width:100%;text-align:center;margin-top:6px;}
+
+  @media (max-width:760px){
+    .map-new-form{grid-template-columns:1fr 1fr;}
+    .map-stage{flex-direction:column;}
+    .inspector{width:100%;}
+  }
 </style>
 </head>
 <body>
@@ -271,6 +364,13 @@
       <span class="name">ShornTech</span>
     </div>
   </header>
+
+  <nav class="tabs" role="tablist" aria-label="Tools">
+    <button type="button" class="tab-btn is-active" id="tab-btn-ledger" role="tab" aria-selected="true" aria-controls="tab-ledger">Initiative Ledger</button>
+    <button type="button" class="tab-btn" id="tab-btn-map" role="tab" aria-selected="false" aria-controls="tab-map">Map Creator</button>
+  </nav>
+
+  <section id="tab-ledger" role="tabpanel" aria-labelledby="tab-btn-ledger">
 
   <h1 class="page-title">Initiative Ledger</h1>
   <p class="subtitle">Track turns, hit points, and conditions without losing your place at the table.</p>
@@ -342,6 +442,93 @@
     <option value="Stunned"><option value="Unconscious"><option value="Exhaustion">
     <option value="Concentrating">
   </datalist>
+
+  </section>
+
+  <section id="tab-map" role="tabpanel" aria-labelledby="tab-btn-map" hidden>
+
+    <h1 class="page-title">Map Creator</h1>
+    <p class="subtitle">Sketch battle grids, dungeon layouts, or a campaign map — and link tokens to your ledger.</p>
+
+    <div class="map-bar">
+      <div class="map-chips" id="map-chips"></div>
+      <button type="button" class="btn-ghost" id="map-new-btn">+ New map</button>
+    </div>
+
+    <form id="map-new-form" class="map-new-form" hidden>
+      <div class="field">
+        <label for="mf-name">Map name</label>
+        <input type="text" id="mf-name" placeholder="Goblin ambush" required>
+      </div>
+      <div class="field">
+        <label for="mf-kind">Kind</label>
+        <select id="mf-kind">
+          <option value="Battle">Battle grid</option>
+          <option value="Dungeon">Dungeon layout</option>
+          <option value="World">Campaign map</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="mf-cols">Columns</label>
+        <input type="number" id="mf-cols" value="14" min="4" max="40">
+      </div>
+      <div class="field">
+        <label for="mf-rows">Rows</label>
+        <input type="number" id="mf-rows" value="10" min="4" max="30">
+      </div>
+      <div class="field submit-cell">
+        <label>&nbsp;</label>
+        <button type="submit" class="btn-add">Create map</button>
+      </div>
+      <button type="button" class="link-danger" id="map-new-cancel">Cancel</button>
+    </form>
+
+    <div class="empty-state" id="map-empty-state">No maps yet. Click "+ New map" to sketch your first one.</div>
+
+    <div id="map-editor" hidden>
+
+      <div class="map-meta">
+        <input type="text" id="map-name-input" class="map-name-input" aria-label="Map name">
+        <span class="type-badge" id="map-kind-badge">Battle</span>
+        <div class="spacer"></div>
+        <button type="button" class="btn-ghost" id="map-duplicate">Duplicate</button>
+        <button type="button" class="btn-ghost" id="map-export">Export PNG</button>
+        <button type="button" class="link-danger" id="map-delete">Delete map</button>
+      </div>
+
+      <div class="toolbar">
+        <div class="tool-group" role="group" aria-label="Tools">
+          <button type="button" class="tool-btn is-active" data-tool="select" title="Select &amp; move">Select</button>
+          <button type="button" class="tool-btn" data-tool="paint" title="Paint terrain">Paint</button>
+          <button type="button" class="tool-btn" data-tool="token" title="Place a token">Token</button>
+          <button type="button" class="tool-btn" data-tool="label" title="Place a pin / label">Label</button>
+          <button type="button" class="tool-btn" data-tool="erase" title="Erase">Erase</button>
+        </div>
+        <div class="palette" id="terrain-palette"></div>
+        <div class="spacer"></div>
+        <label class="grid-toggle"><input type="checkbox" id="map-grid-toggle" checked> Grid lines</label>
+      </div>
+
+      <div class="map-resize">
+        <div class="field"><label for="mr-cols">Columns</label><input type="number" id="mr-cols" min="4" max="40"></div>
+        <div class="field"><label for="mr-rows">Rows</label><input type="number" id="mr-rows" min="4" max="30"></div>
+        <div class="field"><label for="mr-cell">Cell size</label><input type="range" id="mr-cell" min="24" max="64" step="2"></div>
+        <button type="button" class="btn-ghost" id="map-resize-apply">Apply size</button>
+      </div>
+
+      <div class="map-stage">
+        <div class="canvas-wrap" id="canvas-wrap">
+          <canvas id="map-canvas"></canvas>
+        </div>
+
+        <aside class="inspector" id="inspector">
+          <p class="inspector-hint" id="inspector-hint">Pick a tool, then click the grid. Paint terrain, drop tokens, or place a label. Select a token or label to edit it here.</p>
+        </aside>
+      </div>
+
+    </div>
+
+  </section>
 
   <footer class="site">Built for the table.</footer>
 </div>
@@ -649,6 +836,473 @@ fetch("/api/visit", { method: "POST" }).catch(() => {});
   load();
   ensureActive();
   render();
+})();
+</script>
+
+<script>
+// ---------- Tab switching ----------
+(function(){
+  "use strict";
+  function showTab(name){
+    var isLedger = name === 'ledger';
+    document.getElementById('tab-ledger').hidden = !isLedger;
+    document.getElementById('tab-map').hidden = isLedger;
+    document.getElementById('tab-btn-ledger').classList.toggle('is-active', isLedger);
+    document.getElementById('tab-btn-map').classList.toggle('is-active', !isLedger);
+    document.getElementById('tab-btn-ledger').setAttribute('aria-selected', String(isLedger));
+    document.getElementById('tab-btn-map').setAttribute('aria-selected', String(!isLedger));
+  }
+  document.getElementById('tab-btn-ledger').addEventListener('click', function(){ showTab('ledger'); });
+  document.getElementById('tab-btn-map').addEventListener('click', function(){ showTab('map'); });
+})();
+</script>
+
+<script>
+// ---------- Map Creator ----------
+(function(){
+  "use strict";
+  var MAP_KEY = "shorntech-maps-v1";
+  var LEDGER_KEY = "shorntech-initiative-ledger-v1";
+
+  var TERRAIN = [
+    {key:'blank', label:'Floor', color:'#fffdf8', glyph:''},
+    {key:'wall', label:'Wall', color:'#3a2c3d', glyph:''},
+    {key:'water', label:'Water', color:'#5b87a8', glyph:''},
+    {key:'difficult', label:'Difficult terrain', color:'#9c7a4f', glyph:''},
+    {key:'forest', label:'Forest', color:'#4c7a52', glyph:'\uD83C\uDF32'},
+    {key:'mountain', label:'Mountain', color:'#7c7c84', glyph:'\u26F0'},
+    {key:'road', label:'Road', color:'#cbb992', glyph:''},
+    {key:'hazard', label:'Hazard', color:'#9a4030', glyph:'\uD83D\uDD25'},
+    {key:'settlement', label:'Settlement', color:'#c79a4f', glyph:'\uD83C\uDFF0'}
+  ];
+  var TERRAIN_BY_KEY = {};
+  TERRAIN.forEach(function(t){ TERRAIN_BY_KEY[t.key] = t; });
+  var ICONS = ['\uD83D\uDCCD','\uD83C\uDFF0','\u2694\uFE0F','\uD83D\uDC80','\uD83D\uDEAA','\uD83D\uDD25','\u2B50','\uD83D\uDDDD\uFE0F'];
+
+  var mapState = { maps: [], activeId: null };
+  var tool = 'select';
+  var activeTerrain = 'wall';
+  var selected = null; // {kind:'token'|'label', id}
+  var ctx = null;
+  var painting = false;
+  var dragging = null;
+
+  function uid(p){ return p + Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
+  function clampInt(v, lo, hi, fallback){ var n = parseInt(v,10); if(isNaN(n)) return fallback; return Math.max(lo, Math.min(hi, n)); }
+  function getCss(name){ return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, function(ch){
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[ch];
+    });
+  }
+  function initials(name){
+    if(!name) return '?';
+    var parts = name.trim().split(/\s+/);
+    if(parts.length === 1) return parts[0].slice(0,2).toUpperCase();
+    return (parts[0][0] + parts[1][0]).toUpperCase();
+  }
+
+  function loadMaps(){
+    try{
+      var raw = localStorage.getItem(MAP_KEY);
+      if(raw){
+        var parsed = JSON.parse(raw);
+        if(parsed && Array.isArray(parsed.maps)) mapState = parsed;
+      }
+    }catch(e){ /* ignore corrupt storage */ }
+  }
+  function saveMaps(){
+    try{ localStorage.setItem(MAP_KEY, JSON.stringify(mapState)); }catch(e){ /* storage unavailable */ }
+  }
+  function getLedgerCombatants(){
+    try{
+      var raw = localStorage.getItem(LEDGER_KEY);
+      if(!raw) return [];
+      var parsed = JSON.parse(raw);
+      return Array.isArray(parsed.combatants) ? parsed.combatants : [];
+    }catch(e){ return []; }
+  }
+
+  function newMap(name, kind, cols, rows){
+    return {
+      id: uid('map'), name: name, kind: kind,
+      cols: cols, rows: rows, cellSize: kind === 'World' ? 48 : 40,
+      showGrid: true, cells: {}, tokens: [], labels: []
+    };
+  }
+  function getActiveMap(){
+    return mapState.maps.find(function(m){ return m.id === mapState.activeId; }) || null;
+  }
+  function findTokenAt(m,c,r){ return m.tokens.find(function(t){ return t.x===c && t.y===r; }); }
+  function findLabelAt(m,c,r){ return m.labels.find(function(t){ return t.x===c && t.y===r; }); }
+
+  // ---------- Rendering ----------
+  function renderChips(){
+    var wrap = document.getElementById('map-chips');
+    wrap.innerHTML = mapState.maps.map(function(m){
+      var active = m.id === mapState.activeId;
+      return '<span class="map-chip' + (active ? ' is-active' : '') + '">' +
+        '<button type="button" class="open" data-id="' + m.id + '">' + escapeHtml(m.name) + '</button>' +
+        '<button type="button" class="close-chip" data-id="' + m.id + '" aria-label="Delete ' + escapeHtml(m.name) + '">&times;</button>' +
+      '</span>';
+    }).join('');
+  }
+
+  function syncEditorMeta(m){
+    document.getElementById('map-name-input').value = m.name;
+    var badge = document.getElementById('map-kind-badge');
+    badge.textContent = m.kind;
+    badge.className = 'type-badge kind-' + m.kind;
+    document.getElementById('map-grid-toggle').checked = m.showGrid;
+    document.getElementById('mr-cols').value = m.cols;
+    document.getElementById('mr-rows').value = m.rows;
+    document.getElementById('mr-cell').value = m.cellSize;
+  }
+
+  function setupCanvas(m){
+    var canvas = document.getElementById('map-canvas');
+    var dpr = window.devicePixelRatio || 1;
+    var w = m.cols * m.cellSize, h = m.rows * m.cellSize;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    canvas.style.width = w + 'px';
+    canvas.style.height = h + 'px';
+    ctx = canvas.getContext('2d');
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function drawMap(m){
+    if(!ctx || !m) return;
+    var w = m.cols * m.cellSize, h = m.rows * m.cellSize;
+    ctx.clearRect(0,0,w,h);
+
+    for(var r=0; r<m.rows; r++){
+      for(var c=0; c<m.cols; c++){
+        var key = m.cells[c+','+r] || 'blank';
+        var t = TERRAIN_BY_KEY[key] || TERRAIN_BY_KEY.blank;
+        ctx.fillStyle = t.color;
+        ctx.fillRect(c*m.cellSize, r*m.cellSize, m.cellSize, m.cellSize);
+        if(t.glyph){
+          ctx.font = Math.floor(m.cellSize*0.55) + 'px sans-serif';
+          ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+          ctx.fillText(t.glyph, c*m.cellSize + m.cellSize/2, r*m.cellSize + m.cellSize/2);
+        }
+      }
+    }
+
+    if(m.showGrid){
+      ctx.strokeStyle = 'rgba(37,26,39,0.18)';
+      ctx.lineWidth = 1;
+      for(var c2=0; c2<=m.cols; c2++){
+        ctx.beginPath(); ctx.moveTo(c2*m.cellSize+0.5, 0); ctx.lineTo(c2*m.cellSize+0.5, h); ctx.stroke();
+      }
+      for(var r2=0; r2<=m.rows; r2++){
+        ctx.beginPath(); ctx.moveTo(0, r2*m.cellSize+0.5); ctx.lineTo(w, r2*m.cellSize+0.5); ctx.stroke();
+      }
+    }
+
+    m.tokens.forEach(function(tok){
+      var cx = tok.x*m.cellSize + m.cellSize/2, cy = tok.y*m.cellSize + m.cellSize/2;
+      var radius = m.cellSize*0.38;
+      var isSel = selected && selected.kind==='token' && selected.id===tok.id;
+      ctx.beginPath(); ctx.arc(cx, cy, radius, 0, Math.PI*2);
+      ctx.fillStyle = tok.color; ctx.fill();
+      ctx.lineWidth = isSel ? 3 : 1.5;
+      ctx.strokeStyle = isSel ? getCss('--gold') : '#fffdf8';
+      ctx.stroke();
+      ctx.fillStyle = '#fffdf8';
+      ctx.font = '700 ' + Math.floor(m.cellSize*0.32) + 'px "JetBrains Mono", monospace';
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText(initials(tok.label), cx, cy);
+    });
+
+    m.labels.forEach(function(lb){
+      var cx = lb.x*m.cellSize + m.cellSize/2, cy = lb.y*m.cellSize + m.cellSize/2;
+      var isSel = selected && selected.kind==='label' && selected.id===lb.id;
+      ctx.font = Math.floor(m.cellSize*0.5) + 'px sans-serif';
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText(lb.icon || '\uD83D\uDCCD', cx, cy);
+      if(isSel){
+        ctx.strokeStyle = getCss('--gold'); ctx.lineWidth = 2;
+        ctx.strokeRect(lb.x*m.cellSize+2, lb.y*m.cellSize+2, m.cellSize-4, m.cellSize-4);
+      }
+    });
+  }
+
+  function renderPalette(){
+    var wrap = document.getElementById('terrain-palette');
+    if(tool !== 'paint'){ wrap.innerHTML = ''; return; }
+    wrap.innerHTML = TERRAIN.map(function(t){
+      return '<button type="button" class="swatch' + (t.key===activeTerrain ? ' is-active' : '') +
+        '" data-key="' + t.key + '" title="' + t.label + '" style="background:' + t.color + ';">' + (t.glyph || '') + '</button>';
+    }).join('');
+  }
+
+  function renderInspector(){
+    var panel = document.getElementById('inspector');
+    var m = getActiveMap();
+    if(!selected || !m){
+      panel.innerHTML = '<p class="inspector-hint">Pick a tool, then click the grid. Paint terrain, drop tokens, or place a label. Select a token or label to edit it here.</p>';
+      return;
+    }
+    if(selected.kind === 'token'){
+      var tok = m.tokens.find(function(t){ return t.id===selected.id; });
+      if(!tok){ selected = null; renderInspector(); return; }
+      var ledger = getLedgerCombatants();
+      var linked = ledger.find(function(c){ return c.id===tok.linkId; });
+      var hpHtml = linked ? '<div class="hp-readout">' + linked.hp + ' / ' + linked.maxHp + ' HP</div>' : '';
+      var options = '<option value="">\u2014 none \u2014</option>' + ledger.map(function(c){
+        return '<option value="' + c.id + '"' + (c.id===tok.linkId ? ' selected' : '') + '>' + escapeHtml(c.name) + ' (' + c.type + ')</option>';
+      }).join('');
+      panel.innerHTML =
+        '<h3>Token</h3>' +
+        '<div class="field"><label for="insp-name">Name</label><input type="text" id="insp-name" value="' + escapeHtml(tok.label) + '"></div>' +
+        '<div class="field"><label for="insp-color">Color</label><input type="color" id="insp-color" value="' + tok.color + '"></div>' +
+        '<div class="field"><label for="insp-link">Link to combatant</label><select id="insp-link">' + options + '</select></div>' +
+        hpHtml +
+        '<button type="button" class="link-danger" id="insp-delete">Remove token</button>';
+      document.getElementById('insp-name').addEventListener('change', function(){ tok.label = this.value.trim() || 'Token'; saveMaps(); drawMap(m); });
+      document.getElementById('insp-color').addEventListener('change', function(){ tok.color = this.value; saveMaps(); drawMap(m); });
+      document.getElementById('insp-link').addEventListener('change', function(){
+        tok.linkId = this.value || null;
+        if(tok.linkId){
+          var c = ledger.find(function(x){ return x.id===tok.linkId; });
+          if(c){
+            tok.label = c.name;
+            tok.color = c.type==='PC' ? getCss('--brand') : (c.type==='Enemy' ? getCss('--blood') : getCss('--gold'));
+          }
+        }
+        saveMaps(); renderInspector(); drawMap(m);
+      });
+      document.getElementById('insp-delete').addEventListener('click', function(){
+        m.tokens = m.tokens.filter(function(t){ return t.id !== tok.id; });
+        selected = null; saveMaps(); renderInspector(); drawMap(m);
+      });
+    } else {
+      var lbl = m.labels.find(function(t){ return t.id===selected.id; });
+      if(!lbl){ selected = null; renderInspector(); return; }
+      panel.innerHTML =
+        '<h3>Label</h3>' +
+        '<div class="field"><label for="insp-text">Text</label><input type="text" id="insp-text" value="' + escapeHtml(lbl.text) + '"></div>' +
+        '<div class="field"><label for="insp-icon">Icon</label><select id="insp-icon">' +
+          ICONS.map(function(ic){ return '<option value="' + ic + '"' + (ic===lbl.icon ? ' selected' : '') + '>' + ic + '</option>'; }).join('') +
+        '</select></div>' +
+        '<button type="button" class="link-danger" id="insp-delete">Remove label</button>';
+      document.getElementById('insp-text').addEventListener('change', function(){ lbl.text = this.value.trim() || 'Label'; saveMaps(); });
+      document.getElementById('insp-icon').addEventListener('change', function(){ lbl.icon = this.value; saveMaps(); drawMap(m); });
+      document.getElementById('insp-delete').addEventListener('click', function(){
+        m.labels = m.labels.filter(function(t){ return t.id !== lbl.id; });
+        selected = null; saveMaps(); renderInspector(); drawMap(m);
+      });
+    }
+  }
+
+  function renderAll(){
+    renderChips();
+    var m = getActiveMap();
+    var editor = document.getElementById('map-editor');
+    var empty = document.getElementById('map-empty-state');
+    if(!m){ editor.hidden = true; empty.hidden = false; return; }
+    empty.hidden = true; editor.hidden = false;
+    syncEditorMeta(m);
+    setupCanvas(m);
+    renderPalette();
+    drawMap(m);
+    renderInspector();
+  }
+
+  function selectItem(kind, id){
+    selected = kind ? {kind:kind, id:id} : null;
+    renderInspector();
+  }
+
+  function paintCell(m,c,r){ m.cells[c+','+r] = activeTerrain; }
+  function eraseCell(m,c,r){
+    delete m.cells[c+','+r];
+    var tok = findTokenAt(m,c,r);
+    if(tok){ m.tokens = m.tokens.filter(function(t){ return t!==tok; }); if(selected && selected.id===tok.id) selected=null; }
+    var lbl = findLabelAt(m,c,r);
+    if(lbl){ m.labels = m.labels.filter(function(t){ return t!==lbl; }); if(selected && selected.id===lbl.id) selected=null; }
+  }
+
+  function pointToCell(clientX, clientY, m){
+    var canvas = document.getElementById('map-canvas');
+    var rect = canvas.getBoundingClientRect();
+    var x = clientX - rect.left, y = clientY - rect.top;
+    var c = Math.max(0, Math.min(m.cols-1, Math.floor(x / m.cellSize)));
+    var r = Math.max(0, Math.min(m.rows-1, Math.floor(y / m.cellSize)));
+    return {c:c, r:r};
+  }
+
+  // ---------- Event wiring ----------
+  document.getElementById('map-chips').addEventListener('click', function(e){
+    var openBtn = e.target.closest('button.open');
+    var closeBtn = e.target.closest('button.close-chip');
+    if(openBtn){
+      mapState.activeId = openBtn.dataset.id; selected = null; saveMaps(); renderAll();
+    } else if(closeBtn){
+      if(confirm('Delete this map? This cannot be undone.')){
+        var id = closeBtn.dataset.id;
+        mapState.maps = mapState.maps.filter(function(m2){ return m2.id !== id; });
+        if(mapState.activeId === id) mapState.activeId = mapState.maps.length ? mapState.maps[0].id : null;
+        saveMaps(); renderAll();
+      }
+    }
+  });
+
+  document.getElementById('map-new-btn').addEventListener('click', function(){
+    document.getElementById('map-new-form').hidden = false;
+    document.getElementById('mf-name').focus();
+  });
+  document.getElementById('map-new-cancel').addEventListener('click', function(){
+    document.getElementById('map-new-form').hidden = true;
+  });
+  document.getElementById('map-new-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = document.getElementById('mf-name').value.trim();
+    if(!name) return;
+    var kind = document.getElementById('mf-kind').value;
+    var cols = clampInt(document.getElementById('mf-cols').value, 4, 40, 14);
+    var rows = clampInt(document.getElementById('mf-rows').value, 4, 30, 10);
+    var m = newMap(name, kind, cols, rows);
+    mapState.maps.push(m);
+    mapState.activeId = m.id;
+    saveMaps();
+    this.reset();
+    document.getElementById('mf-cols').value = 14;
+    document.getElementById('mf-rows').value = 10;
+    document.getElementById('map-new-form').hidden = true;
+    renderAll();
+  });
+
+  document.querySelectorAll('.tool-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      tool = btn.dataset.tool;
+      document.querySelectorAll('.tool-btn').forEach(function(b){ b.classList.toggle('is-active', b===btn); });
+      renderPalette();
+      if(tool !== 'select'){
+        selected = null; renderInspector();
+        var m = getActiveMap(); if(m) drawMap(m);
+      }
+    });
+  });
+
+  document.getElementById('terrain-palette').addEventListener('click', function(e){
+    var btn = e.target.closest('button.swatch'); if(!btn) return;
+    activeTerrain = btn.dataset.key;
+    renderPalette();
+  });
+
+  document.getElementById('map-grid-toggle').addEventListener('change', function(){
+    var m = getActiveMap(); if(!m) return;
+    m.showGrid = this.checked; saveMaps(); drawMap(m);
+  });
+
+  document.getElementById('map-name-input').addEventListener('change', function(){
+    var m = getActiveMap(); if(!m) return;
+    m.name = this.value.trim() || 'Untitled map'; saveMaps(); renderChips();
+  });
+
+  document.getElementById('map-resize-apply').addEventListener('click', function(){
+    var m = getActiveMap(); if(!m) return;
+    var cols = clampInt(document.getElementById('mr-cols').value, 4, 40, m.cols);
+    var rows = clampInt(document.getElementById('mr-rows').value, 4, 30, m.rows);
+    var cell = clampInt(document.getElementById('mr-cell').value, 24, 64, m.cellSize);
+    m.cols = cols; m.rows = rows; m.cellSize = cell;
+    Object.keys(m.cells).forEach(function(k){
+      var parts = k.split(','); var c = +parts[0], r = +parts[1];
+      if(c >= cols || r >= rows) delete m.cells[k];
+    });
+    m.tokens = m.tokens.filter(function(t){ return t.x < cols && t.y < rows; });
+    m.labels = m.labels.filter(function(t){ return t.x < cols && t.y < rows; });
+    selected = null;
+    saveMaps(); setupCanvas(m); drawMap(m); renderInspector();
+  });
+
+  document.getElementById('map-duplicate').addEventListener('click', function(){
+    var m = getActiveMap(); if(!m) return;
+    var copy = JSON.parse(JSON.stringify(m));
+    copy.id = uid('map'); copy.name = m.name + ' (copy)';
+    mapState.maps.push(copy); mapState.activeId = copy.id; selected = null;
+    saveMaps(); renderAll();
+  });
+
+  document.getElementById('map-delete').addEventListener('click', function(){
+    var m = getActiveMap(); if(!m) return;
+    if(!confirm('Delete "' + m.name + '"? This cannot be undone.')) return;
+    mapState.maps = mapState.maps.filter(function(x){ return x.id !== m.id; });
+    mapState.activeId = mapState.maps.length ? mapState.maps[0].id : null;
+    selected = null;
+    saveMaps(); renderAll();
+  });
+
+  document.getElementById('map-export').addEventListener('click', function(){
+    var m = getActiveMap(); if(!m) return;
+    var canvas = document.getElementById('map-canvas');
+    var link = document.createElement('a');
+    link.download = (m.name.replace(/[^a-z0-9\-_ ]/gi,'').trim() || 'map') + '.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  });
+
+  // Pointer events cover mouse, touch, and pen in one set of handlers (tablet-friendly).
+  var canvasEl = document.getElementById('map-canvas');
+
+  canvasEl.addEventListener('pointerdown', function(e){
+    var m = getActiveMap(); if(!m) return;
+    canvasEl.setPointerCapture(e.pointerId);
+    var cell = pointToCell(e.clientX, e.clientY, m);
+
+    if(tool === 'paint'){ painting = true; paintCell(m, cell.c, cell.r); }
+    else if(tool === 'erase'){ painting = true; eraseCell(m, cell.c, cell.r); }
+    else if(tool === 'token'){
+      var existing = findTokenAt(m, cell.c, cell.r);
+      if(existing){ selectItem('token', existing.id); }
+      else{
+        var t = {id:uid('tok'), x:cell.c, y:cell.r, label:'New token', color:getCss('--ink-soft'), linkId:null};
+        m.tokens.push(t); saveMaps(); selectItem('token', t.id);
+      }
+    } else if(tool === 'label'){
+      var existingL = findLabelAt(m, cell.c, cell.r);
+      if(existingL){ selectItem('label', existingL.id); }
+      else{
+        var lb = {id:uid('lbl'), x:cell.c, y:cell.r, text:'Label', icon:'\uD83D\uDCCD'};
+        m.labels.push(lb); saveMaps(); selectItem('label', lb.id);
+      }
+    } else {
+      var tok2 = findTokenAt(m, cell.c, cell.r);
+      var lbl2 = !tok2 ? findLabelAt(m, cell.c, cell.r) : null;
+      if(tok2){ selectItem('token', tok2.id); dragging = {kind:'token', id:tok2.id}; }
+      else if(lbl2){ selectItem('label', lbl2.id); dragging = {kind:'label', id:lbl2.id}; }
+      else { selectItem(null); }
+    }
+    drawMap(m);
+  });
+
+  canvasEl.addEventListener('pointermove', function(e){
+    var m = getActiveMap(); if(!m) return;
+    if(!painting && !dragging) return;
+    var cell = pointToCell(e.clientX, e.clientY, m);
+    if(painting && tool === 'paint'){ paintCell(m, cell.c, cell.r); drawMap(m); }
+    else if(painting && tool === 'erase'){ eraseCell(m, cell.c, cell.r); drawMap(m); }
+    else if(dragging){
+      var item = dragging.kind === 'token' ? m.tokens.find(function(t){ return t.id===dragging.id; }) : m.labels.find(function(t){ return t.id===dragging.id; });
+      if(item){ item.x = cell.c; item.y = cell.r; drawMap(m); }
+    }
+  });
+
+  function endStroke(){
+    if(painting || dragging){
+      painting = false; dragging = null;
+      saveMaps();
+    }
+  }
+  canvasEl.addEventListener('pointerup', endStroke);
+  canvasEl.addEventListener('pointercancel', endStroke);
+
+  loadMaps();
+  if(mapState.maps.length && !mapState.activeId) mapState.activeId = mapState.maps[0].id;
+  renderAll();
 })();
 </script>
 </body>
